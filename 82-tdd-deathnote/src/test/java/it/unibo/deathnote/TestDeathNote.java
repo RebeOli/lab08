@@ -14,7 +14,10 @@ import it.unibo.deathnote.impl.DeathNoteImpl;
 import it.unibo.deathnote.api.DeathNote;
 
 class TestDeathNote {
-    private static final int RULE=5; 
+    private static final int RULE=5;
+    private static final String NAME="Luca";  
+    private static final String NAME2="Marco";  
+
     private DeathNote deathNote;
 
     @BeforeEach
@@ -39,6 +42,14 @@ class TestDeathNote {
                     throw new NullPointerException("Rule is empty or null");
                 }
             }
+    }
+    @Test
+    public void testName(){
+        assertEquals(deathNote.isNameWritten(NAME), false);
+        deathNote.writeName(NAME);
+        assertEquals(deathNote.isNameWritten(NAME), true);
+        assertEquals(deathNote.isNameWritten(NAME2), false);
+        assertEquals(deathNote.isNameWritten(" "), false);
     }
 
 
