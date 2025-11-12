@@ -15,23 +15,32 @@ import it.unibo.deathnote.api.DeathNote;
 
 class TestDeathNote {
     private static final int RULE=5; 
-    private DeathNote deadNote;
+    private DeathNote deathNote;
 
     @BeforeEach
     void setUp() {
-        deadNote= new DeathNoteImpl();
+        deathNote= new DeathNoteImpl();
     }
     @Test
     public void testRule() {
         int[] array=new int[]{0, -RULE};
         for (int x : array){
             try{
-                deadNote.getRule(x);
+                deathNote.getRule(x);
             }catch(Exception e){
                 assertEquals(new IllegalArgumentException(), e);
             }
         }  
     }
+    @Test
+    public void testRuleNotNull(){
+            for(String rule : DeathNote.RULES){
+                if(rule==null || rule==" "){
+                    throw new NullPointerException("Rule is empty or null");
+                }
+            }
+    }
+
 
 
     
