@@ -42,12 +42,13 @@ class TestDeathNote {
     }
     @Test
     public void testRuleNotNull(){
-            for(String rule : DeathNote.RULES){
-                if(rule==null || rule==" "){
-                    throw new NullPointerException("Rule is empty or null");
-                }
+        for(String rule : DeathNote.RULES){
+            if(rule == null || rule == " "){
+                throw new NullPointerException("Rule is empty or null");
             }
+        }
     }
+    
     @Test
     public void testName(){
         assertEquals(deathNote.isNameWritten(NAME), false);

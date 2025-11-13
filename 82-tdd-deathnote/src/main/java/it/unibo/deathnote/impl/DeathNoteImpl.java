@@ -1,3 +1,5 @@
+package it.unibo.deathnote.impl;
+
 import it.unibo.deathnote.api.DeathNote;
 
 public class DeathNoteImpl implements DeathNote{
@@ -43,4 +45,5 @@ public class DeathNoteImpl implements DeathNote{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isNameWritten'");
     }
+}
     
