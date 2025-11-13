@@ -14,9 +14,14 @@ class TestDeathNote {
     private static final int RULE=5;
     private static final String CAUSE1="Shot";
     private static final String CAUSE2="karting accident";
+    private static final String DETAILS1="ran for too long";
+    private static final String DETAILS2="out of breath";
     private static final String GENERAL_CAUSE="Heart Attack";
     private static final String NAME="Luca";  
     private static final String NAME2="Marco";  
+    private static final int SPLEEP1=100;
+    private static final int SPLEEP2=6100;
+
 
     private DeathNote deathNote;
 
@@ -67,14 +72,33 @@ class TestDeathNote {
         assertEquals(deathNote.writeDeathCause(CAUSE2), true);
         assertEquals(deathNote.getDeathCause(NAME2), CAUSE2);
         try{
-            Thread.sleep(100);
+            Thread.sleep(SPLEEP1);
         }catch(InterruptedException e){
             throw new IllegalArgumentException();
         }
         deathNote.writeDeathCause(CAUSE1);
         assertEquals(deathNote.getDeathCause(NAME2), CAUSE2);
     }
+    @Test
+    public void testDetails(){
+        assertThrows(IllegalArgumentException.class, new Executable() {
 
-
-    
+            @Override
+            public void execute() throws Throwable {
+                deathNote.getDeathDetails(NAME);
+            }
+        });
+        deathNote.writeName(NAME);
+        assertEquals(deathNote.getDeathDetails(NAME), " ");
+        assertEquals(deathNote.writeDetails(DETAILS1), true);
+        assertEquals(deathNote.getDeathDetails(NAME), DETAILS1);
+        deathNote.writeName(NAME2);
+        try{
+            Thread.sleep(SPLEEP2);
+        }catch(InterruptedException e){
+            throw new IllegalArgumentException();
+        }
+        deathNote.writeDetails(DETAILS2);
+        assertEquals(deathNote.getDeathCause(NAME2), DETAILS2);
+    }
 }
