@@ -3,9 +3,6 @@ package it.unibo.deathnote;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
-
-import java.util.concurrent.ExecutionException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -15,6 +12,9 @@ import it.unibo.deathnote.api.DeathNote;
 
 class TestDeathNote {
     private static final int RULE=5;
+    private static final String CAUSE1="Shot";
+    private static final String CAUSE2="karting accident";
+    private static final String GENERAL_CAUSE="Heart Attack";
     private static final String NAME="Luca";  
     private static final String NAME2="Marco";  
 
@@ -51,7 +51,29 @@ class TestDeathNote {
         assertEquals(deathNote.isNameWritten(NAME2), false);
         assertEquals(deathNote.isNameWritten(" "), false);
     }
+    @Test
+    public void testCauseOfDeath(){
+        assertThrows(IllegalStateException.class, new Executable() {
 
+            @Override
+            public void execute() throws Throwable {
+                deathNote.writeDeathCause(CAUSE1);
+            }
+            
+        });
+        deathNote.writeName(NAME);
+        assertEquals(deathNote.getDeathCause(NAME), GENERAL_CAUSE);
+        deathNote.writeName(NAME2);
+        assertEquals(deathNote.writeDeathCause(CAUSE2), true);
+        assertEquals(deathNote.getDeathCause(NAME2), CAUSE2);
+        try{
+            Thread.sleep(100);
+        }catch(InterruptedException e){
+            throw new IllegalArgumentException();
+        }
+        deathNote.writeDeathCause(CAUSE1);
+        assertEquals(deathNote.getDeathCause(NAME2), CAUSE2);
+    }
 
 
     
