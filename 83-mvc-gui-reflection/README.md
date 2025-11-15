@@ -15,6 +15,7 @@ whether graphical or on command line (or network, or whatever).
 * Extend the controller to support multiple views.
   To doing so, make sure that the controller has a collection of views (and not a single one),
   and that it notifies all of them (for instance with a `for` cicle) every time a new event should be displayed.
+  
 * Attach at the same time two graphical views and a console view, and verify that the application works as expected.
 
 ## Reflection loading
