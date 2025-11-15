@@ -17,7 +17,7 @@ public final class DrawNumberControllerImpl implements DrawNumberController {
 
     private final DrawNumber model;
     //private DrawNumberView view;
-    private List<DrawNumberView> viewList;
+    private final List<DrawNumberView> viewList;
 
     /**
      * Builds a new game controller provided a game model.
@@ -42,9 +42,12 @@ public final class DrawNumberControllerImpl implements DrawNumberController {
 
     @Override
     public void newAttempt(final int n) {
+        if (this.viewList.isEmpty()) {
+            throw new IllegalStateException("There is no view attached!");
+        }
         final DrawResult result = this.model.attempt(n);
         for (DrawNumberView view : viewList){
-            Objects.requireNonNull(view, "There is no view attached!").result(result);
+            view.result(result);
         }
     }
 
